@@ -1,0 +1,84 @@
+{
+	"__comment1__": "any variables (e.g. redis lookups) which reference other variables must be set at the BOTTOM of the file.",
+	"variable": [
+		{
+			"name" : "nextUrl",
+			"type" : "string",
+			"allowBypass": "true",
+			"format" : [
+				{
+					"value" : "api.congo.beta.tab.com.au/v1/account-service/tab/accounts/999999999/transactional-records"					
+				}
+			]
+		},
+		{
+			"name" : "accountNumber",
+			"type" : "regex",
+			"allowBypass": "false",
+			"format" : [
+				{
+					"regex" : "accounts/(.+?)/"
+				}
+			]
+		},
+		{
+			"name" : "selfUrl",
+			"type" : "string",
+			"allowBypass": "true",
+			"format" : [
+				{
+					"value" : "api.congo.beta.tab.com.au/v1/account-service/tab/accounts/999999999/transactional-records"					
+				}
+			]
+		},
+
+		{
+			"name" : "contentType",
+			"type" : "substring",
+			"allowBypass": "true",
+			"format" : [
+				{
+					"startPos" : "5",
+					"endPos" : "EOL"
+				}
+			]
+		},
+		{
+			"name" : "TabcorpAuth",
+			"type" : "substring",
+			"action": "replace",
+			"allowBypass": "true",
+			"format" : [
+				{
+					"startPos" : "13",
+					"endPos" : "EOL"
+				}
+			]
+		},
+		
+		{
+			"name" : "Content-Type",
+			"type" : "substring",
+			"action": "variable",
+			"allowBypass": "true",
+			"format" : [
+				{
+					"startPos" : "14",
+					"endPos" : "EOL"
+				}
+			]
+		},
+		{
+			"name" : "transactions",
+			"type" : "redis",
+			"action": "variable",
+			"allowBypass": "true",
+			"format" : [
+				{
+					"redisSetName" : "ses_statements",
+					"redisKeyName" : "accountNumber"
+				}
+			]
+		}
+	]
+}

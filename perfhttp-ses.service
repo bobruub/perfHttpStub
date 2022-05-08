@@ -1,0 +1,20 @@
+# file should be copied to /etc/systemd/system
+# run command to add as service: sudo systemctl enable sven-idv.service
+#  run command to start service: sudo systemctl start sven-idv.service
+#
+[Unit]
+Description=perf http  Service
+[Service]
+User=ec2-user
+# The configuration file application.properties should be here:
+# change this to your workspace
+WorkingDirectory=/home/ec2-user/sven/perfHttpStub
+#path to executable.
+#executable is a bash script which calls docker commands
+ExecStart=/home/ec2-user/sven/perfHttpStub/perfhttp-ses
+SuccessExitStatus=143
+TimeoutStopSec=10
+Restart=on-failure
+RestartSec=5
+[Install]
+WantedBy=multi-user.target

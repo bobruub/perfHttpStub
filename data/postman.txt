@@ -1,0 +1,311 @@
+http://192.168.0.81:8090/v1/account-service/tab/accounts/{{pAccountNumber}}/transactional-records
+
+curl --location --request GET 'http://127.0.0.1:8090/v1/account-service/tab/derp/99999936/transactional-records' \
+--header 'TabcorpAuth: 07f1505b489b8a5c27ccf2ed70c3ff4721952139d604d72e0ab947a728d1e71dfd89e9a5cb3e45574e9166837a31e79ff2db4f6ba814d9c506ed2be9156125a54dce5891768e458a752814b8128ef232e98d8a7c787655190f669c2a11aabad9a3fd746fbce52f514887b7eb48a1842c13' \
+--header 'Content-Type: application/json'
+
+
+Key: ses_fo
+TTL: -1
+Type: Hash
+Field	Value
+99999936	11111111111251,MOONEE VALLEY R08 05-05,2022-05-05,WIN,734471,SHIPS CHOICE,Harness Racing,99999936
+
+Key: ses_tote
+TTL: -1
+Type: Hash
+Field	Value
+99999936	TOTE,11111111111239,WIN,6,2022-05-04,1,ZR,CHELTENHAM Racing,CHELTENHAM Racing - R6
+
+
+{"tsn": "11111111111251","eventName": "MOONEE VALLEY R08 05-05","eventDate": "2022-05-05","legType": "WIN","propNumber":"734471","propName":"SHIPS CHOICE","sportName":"Harness Racing","accountNumber":"99999936"}
+
+{"tsn": "11111111111251","eventName": "MOONEE VALLEY R08 05-05","eventDate": "2022-05-05","legType": "WIN","propNumber":"734471","propName":"SHIPS CHOICE","sportName":"Harness Racing","accountNumber":"99999936"}
+
+[
+    "raceEntries"[
+    {
+	"tsn": "11111111111251",
+	"eventName": "MOONEE VALLEY R08 05-05",
+	"eventDate": "2022-05-05",
+	"legType": "WIN",
+	"propNumber": "734471",
+	"propName": "SHIPS CHOICE",
+	"sportName": "Harness Racing",
+	"accountNumber": "99999936"
+}, {
+	"tsn": "11111111111251",
+	"eventName": "MOONEE VALLEY R08 05-05",
+	"eventDate": "2022-05-05",
+	"legType": "WIN",
+	"propNumber": "734471",
+	"propName": "SHIPS CHOICE",
+	"sportName": "Harness Racing",
+	"accountNumber": "99999936"
+}]
+]
+
+[{"tsn": "11111111111251","eventName": "MOONEE VALLEY R08 05-05","eventDate": "2022-05-05","legType": "WIN","propNumber":"734471","propName":"SHIPS CHOICE","sportName":"Harness Racing","accountNumber":"99999936"},{"tsn": "11111111111251","eventName": "MOONEE VALLEY R08 05-05","eventDate": "2022-05-05","legType": "WIN","propNumber":"734471","propName":"SHIPS CHOICE","sportName":"Harness Racing","accountNumber":"99999936"}]
+
+http://10.13.236.69:8090/v1/account-service/tab/accounts/{{pAccountNumber}}/transactional-records
+
+curl --location --request GET 'http://127.0.0.1:8090/v1/account-service/tab/derp/99999936/transactional-records' \
+--header 'TabcorpAuth: 07f1505b489b8a5c27ccf2ed70c3ff4721952139d604d72e0ab947a728d1e71dfd89e9a5cb3e45574e9166837a31e79ff2db4f6ba814d9c506ed2be9156125a54dce5891768e458a752814b8128ef232e98d8a7c787655190f669c2a11aabad9a3fd746fbce52f514887b7eb48a1842c13' \
+--header 'Content-Type: application/json'
+
+
+Key: ses_fo
+TTL: -1
+Type: Hash
+Field	Value
+99999936	11111111111251,MOONEE VALLEY R08 05-05,2022-05-05,WIN,734471,SHIPS CHOICE,Harness Racing,99999936
+
+Key: ses_tote
+TTL: -1
+Type: Hash
+Field	Value
+99999936	TOTE,11111111111239,WIN,6,2022-05-04,1,ZR,CHELTENHAM Racing,CHELTENHAM Racing - R6
+
+{"transactions": [{"tsn": "%foTsn%","balance": "$8110.05","withdrawableBalance": "$8110.05","transactionReference": "27317971746","transactionType": "FO","transactionTime": "2022-05-03T06:20:57Z","details": {"legs": [{"eventName": "%foEventName%","eventDate": "%foEventDate%","legType": "%foLegType%","proposition": {"number": "%foPropId%","name": "%foRunnerName%","result": ""},"sportName": "%foSportName%","odds": "1.01","secondaryOdds": "0.00","extraLegDetail": "Refunds and Deductions Apply","result": "pending"}],"result": "pending","type": "%foLegType%","extraDetail": "Refunds and Deductions Apply","combination": null,"isBonusBet": false,"flexiDetail": null,"cashOutDetails": null,"eventName": "%foEventName%","betReturnDetails": {"type": "Estimated Return","details": [{"label": "","value": "$1.01"}]},"betPriceDetails": {"type": "Odds","details": [{"label": "","value": "1.01"}]},"betAmountDetails": {"type": "Stake","details": [{"label": "","value": "$1.00"}]},"multiplier": null,"toteGuarantee": {"status": "skip"}}},{"tsn": "%toteTsn%","balance": "$98439.37","withdrawableBalance": "$5340.37","transactionReference": "7850379","transactionType": "%toteTransactionType%","transactionTime": "2022-04-19T06:04:37Z","details": {"isSport": false,"legs": [{"raceNumber": "R%toteRaceNumber%","eventDate": "%toteEventDate%","selection": "%toteSelection%","legType": "%toteLegType%"}],"result": "won","type": "Win","isBonusBet": false,"cashOutDetails": null,"meetingCode": "%toteMeetingCode%","meetingVenue": "%toteVenue%","flexiDetail": null,"eventName": "%toteEvent%","betReturnDetails": {"type": "Return","details": [{"label": "","value": "$1.00"}]},"betPriceDetails": {"type": "","details": [{"label": "","value": ""}]},"betAmountDetails": {"type": "Cost","details": [{"label": "","value": "$1.00"}]},"multiplier": null,"toteGuarantee": {"status": "skip"}}}],"_links": {"self": "https://api.congo.beta.tab.com.au/v1/account-service/tab/accounts/99999936/transactional-records","next": "https://api.congo.beta.tab.com.au/v1/account-service/tab/accounts/99999936/transactional-records?transactionRef=7761910"},"authentication": {"token": "%tabCorpAuth%","inactivityExpiry": "2022-05-02T09:20:47.817Z","absoluteExpiry": "2022-05-02T09:20:47.305Z","scopes": ["*"]}}
+
+// BeanShell PostProcessor -  SETUP 06 Select Race
+import net.minidev.json.JSONArray;
+import net.minidev.json.JSONObject;
+import net.minidev.json.parser.JSONParser;
+import org.apache.commons.lang.StringUtils;
+import java.text.*;
+import java.time.Instant;
+import org.apache.commons.lang.time.DateUtils;
+
+String currentRace="";
+String raceData="";
+String path = "data/info_racing.csv";
+String pOddsDecimal = "";
+String pOddsFractional = "";
+String pSecondOddsDecimal = "";
+String pSecondOddsFractional = "";
+String eventType = "Racing";
+int propId = 0;	     
+BufferedWriter output = null;
+
+
+String linkData = vars.get("pSportsLink");
+log.info("--------------------------------------------------------------------------");
+log.info("pSportsLink" + pSportsLink + " : " + linkData );
+
+//
+// build json string
+//
+String jsonString = new String(data);
+JSONParser parser = new JSONParser(JSONParser.MODE_JSON_SIMPLE);
+JSONObject race = (JSONObject) parser.parse(data);
+//
+// extract header information
+//
+String pRaceStartTime = race.get("raceStartTime");
+vars.put("pRaceStartTime", pRaceStartTime);
+String pRaceName = race.get("raceName");
+vars.put("pRaceName", pRaceName);
+//
+// get the status of the race, if not NORMAL, then abort
+//
+String raceStatus = race.get("raceStatus");
+if (!raceStatus.equals("Normal")){
+
+	log.info("pRaceName: " + pRaceName + " bet status of: " + mbettingStatus);
+	//log.info("--------------------------------------------------------------------------");
+	return;
+}
+
+//
+// build an array of runners
+//
+JSONArray raceArray = (JSONArray) race.get("runners");
+//
+// if no markets to bet on skip to next iteration
+//
+if (raceArray.size()==1){
+	currentRace="false";
+	vars.put("currentRace",currentRace);
+	log.info("no markets for: " + pRaceName);
+//	log.info("--------------------------------------------------------------------------");
+	return;
+} else {
+	log.info(raceArray.size() + " markets for: " + pRaceName);
+}
+int loopCounter = 0;
+int randValue =  0;
+int oddsCounter = 0;
+while (loopCounter < raceArray.size()){
+
+	currentRace="false";
+//
+// random bet value
+//
+	randValue =  1 + (int) (Math.random() * ((5 - 1) + 1));
+//
+// get current runner
+//
+	JSONObject runner = (JSONObject) raceArray.get(loopCounter);
+	loopCounter ++;
+	String pRunnerName = (String) runner.get("runnerName");
+	vars.put("pRunnerName", pRunnerName);
+//
+// buld an arroy of the odds for the runner
+//
+	JSONArray oddsArray = (JSONArray) runner.get("odds");
+	oddsCounter=0;
+	while (oddsCounter < oddsArray.size())	{
+		JSONObject odds = (JSONObject) oddsArray.get(oddsCounter);
+//
+// extract data required for betting
+//
+		pPropId = odds.get("propositionNumber");
+		oddsCounter++;
+		vars.put("pPropId", "" + pPropId);
+		String pProductType = odds.get("productType");
+		vars.put("pProductType", pProductType);
+		String pBetType = odds.get("betType");
+		vars.put("pBetType", pBetType);
+		String pBettingStatus = odds.get("bettingStatus");
+		vars.put("pBettingStatus",pBettingStatus);    
+		if (pProductType.equals("FIXED_ODDS")){ // get the odds in decimal and fractional.
+			 pOddsDecimal = odds.get("odds").get("decimal");
+			 vars.put("pOddsDecimal", pOddsDecimal);
+			pOddsFractional = odds.get("odds").get("fractional");
+			 vars.put("pOddsFractional", pOddsFractional);
+			 if (pBetType.equals("EACH_WAY")){  // if each way get secondary odds.
+				 pSecondOddsDecimal = odds.get("secondaryOdds").get("decimal");
+				 vars.put("pSecondOddsDecimal", pSecondOddsDecimal);
+				 pSecondOddsFractional = odds.get("secondaryOdds").get("fractional");
+				 vars.put("pSecondOddsFractional", pSecondOddsFractional);   
+			 }
+		}
+//
+//check to see if race start time is after current time + 5 minutes
+//
+		currentRace = "false";
+		SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-M-dd'T'HH:mm:ss.SSS'Z'");
+		Date raceSartDateTime = dateformat.parse(pRaceStartTime); //Format race start time to a date
+		Date currentDate = dateformat.parse(Instant.now().toString()); //Get time in UTC format
+		currentDate = DateUtils.addMinutes(currentDate, 90); //Add 90 minutes to start time to make sure its not just about to drop 
+		if (pBettingStatus.equals("Open")){ // proper bet found so stop looking
+			currentRace="true";
+		} else {
+			currentRace="false";
+		}
+
+		if (!raceSartDateTime.after(currentDate)){ 
+			log.info("pRaceName: " + pRaceName +  + " pPropId: " + pPropId +  " is in the past, " + raceSartDateTime); 
+			continue;
+			currentRace="false";
+		}
+
+		if (currentRace.equals("true")){
+//
+// write the race data to a file
+//
+			raceData = "pRaceName:" + pRaceName;
+			raceData = raceData + ",pBettingStatus:" + pBettingStatus;
+			raceData = raceData + ",pProductType:" + pProductType;
+			raceData = raceData + ",eventType:" + eventType;
+			raceData = raceData + ",pBetType:" + pBetType;
+			raceData = raceData + ",pRunnerName:" + pRunnerName;
+			raceData = raceData + ",pPropId:" + pPropId;
+			raceData = raceData + ",pOddsDecimal:" + pOddsDecimal; 
+			raceData = raceData + ",pOddsFractional:" + pOddsFractional;
+			raceData = raceData + ",pSecondOddsDecimal:" + pSecondOddsDecimal;	    		    	
+			raceData = raceData + ",pSecondOddsFractional:" + pSecondOddsFractional;	    		    	
+			raceData = raceData + ",randValue:" + randValue;	
+			raceData = raceData + ",pRaceStartTime:" + pRaceStartTime;
+			raceData = raceData + ",";
+		
+			try {
+				Writer output;
+				output = new BufferedWriter(new FileWriter(path,true));  //appends to file if it exists
+					log.info("raceData " + raceData);	
+				output.append(raceData + "\n");
+				output.close();
+			} catch ( IOException e ) {
+				e.printStackTrace();
+			} finally {
+			   if ( output != null ) 
+			   {
+				output.close();
+			   }
+			}
+		}
+
+	}
+}
+//log.info("--------------------------------------------------------------------------");
+ 
+
+ {
+	"variable": [
+		{
+			"name" : "contentType",
+			"type" : "substring",
+			"action": "replace",
+			
+			"format" : [
+				{
+					"startPos" : "5",
+					"endPos" : "EOL"
+				}
+			]
+		},
+		{
+			"name" : "TabcorpAuth",
+			"type" : "substring",
+			"action": "replace",
+			"format" : [
+				{
+					"startPos" : "13",
+					"endPos" : "EOL"
+				}
+			]
+		},
+		{
+			"name" : "accountNumber",
+			"type" : "regex",
+			"action": "variable",
+			"format" : [
+				{
+					"regex" : "accounts/(.+?)/"
+				}
+			]
+		},
+		{
+			"name" : "Content-Type",
+			"type" : "substring",
+			"action": "variable",
+			"format" : [
+				{
+					"startPos" : "14",
+					"endPos" : "EOL"
+				}
+			]
+		},
+		{
+			"__comment__": "redis type transactions must be entered in this file AFTER the varibale used for the redisKeyName",
+			"name" : "transactions",
+			"type" : "redis",
+			"action": "variable",
+			"format" : [
+				{
+					"redisSetName" : "ses_statements",
+					"redisKeyName" : "accountNumber"
+				}
+			]
+		}
+	]
+}
+
+{
+	"response": [{
+"contents": "HTTP/1.1 200 OK\\r\\nTabcorpAuth: %TabcorpAuth%\\r\\nContent-Length: %Content-Length%\\r\\nConnection: close\\r\\nContent-Type: %Content-Type%\\r\\n\\r\\n\{\"transactions\": [%transactions%],\"_links\": \{\"self\": \"https://%selfUrl%\",\"next\": \"https://%nextUrl%?transactionRef=7761910\"\},\"authentication\": \{\"token\": \"%TabcorpAuth%\",\"inactivityExpiry\": \"2022-05-02T09:20:47.817Z\",\"absoluteExpiry\": \"2022-05-02T09:20:47.305Z\",\"scopes\": [\"*\"]\}\}
+"}]
+}
+
+{"transactions": [%transactions%],"_links": {"self": "https://%selfUrl%","next": "https://%nextUrl%?transactionRef=7761910"},"authentication": {"token": "%TabcorpAuth%","inactivityExpiry": "2022-05-02T09:20:47.817Z","absoluteExpiry": "2022-05-02T09:20:47.305Z","scopes": ["*"]}}

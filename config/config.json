@@ -1,0 +1,10 @@
+{
+  "httpStubVersion": "1.2",
+  "socketTimeout": 0,
+  "clientTimeout": 0,
+  "threadCount": 100,
+  "port": 8090,
+  "redisServer": "192.168.0.81",
+  "redisPort": 6379,
+  "defaultPause": 100
+}

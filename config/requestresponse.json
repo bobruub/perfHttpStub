@@ -1,0 +1,25 @@
+{
+	"response": [{
+        "name": "01-Transactional-records",
+		"type": "path",
+		"lookupWith": "regex",
+		"lookupValue": "accounts/(.+?)/",
+        "pause": "100",
+		"contents": "HTTP/1.1 200 OK\nTabcorpAuth: %TabcorpAuth%\nContent-Length: %Content-Length%\nConnection: close\nContent-Type: %Content-Type%\n\n{\"transactions\": [%transactions%],\"_links\": {\"self\": \"https://%selfUrl%\",\"next\": \"https://%nextUrl%?transactionRef=7761910\"},\"authentication\": {\"token\": \"%TabcorpAuth%\",\"inactivityExpiry\": \"2022-05-02T09:20:47.817Z\",\"absoluteExpiry\": \"2022-05-02T09:20:47.305Z\",\"scopes\": [\"*\"]}}"
+	},
+    {
+        "name": "02-Transactional-records",
+		"type": "body",
+		"lookupWith": "string",
+		"lookupValue": "accounts",
+        "pause": "100",
+		"contents": "HTTP/1.1 200 OK\nTabcorpAuth: %TabcorpAuth%\nContent-Length: %Content-Length%\nConnection: close\nContent-Type: %Content-Type%\n\n{\"transactionsssss\": [%transactions%],\"_links\": {\"self\": \"https://%selfUrl%\",\"next\": \"https://%nextUrl%?transactionRef=7761910\"},\"authentication\": {\"token\": \"%TabcorpAuth%\",\"inactivityExpiry\": \"2022-05-02T09:20:47.817Z\",\"absoluteExpiry\": \"2022-05-02T09:20:47.305Z\",\"scopes\": [\"*\"]}}"
+	},{
+        "name": "99-Default-404",
+		"type": "path",
+		"lookupWith": "string",
+		"lookupValue": "/",
+        "pause": "100",
+		"contents": "HTTP/1.1 404 Not Found\nContent-Length: %Content-Length%\nConnection: close\nContent-Type: %Content-Type%\n\n 404 NOT FOUND"
+	}]
+}

@@ -1,0 +1,41 @@
+"contents": "HTTP/1.1 200 OK\nTabcorpAuth: %TabcorpAuth%\nContent-Length: %Content-Length%\nConnection: close\nContent-Type: %Content-Type%\n\n{\"transactions\": [%transactions%],\"_links\": {\"self\": \"https://%selfUrl%\",\"next\": \"https://%nextUrl%?transactionRef=7761910\"},\"authentication\": {\"token\": \"%TabcorpAuth%\",\"inactivityExpiry\": \"2022-05-02T09:20:47.817Z\",\"absoluteExpiry\": \"2022-05-02T09:20:47.305Z\",\"scopes\": [\"*\"]}}
+
+"contents": "HTTP/1.1 200 OK\nTabcorpAuth: %TabcorpAuth%\nContent-Length: %Content-Length%\nConnection: close\nContent-Type: %Content-Type%\n\n{}\"transactions\": [%transactions%],\"_links\": {\"self\": \"https://%selfUrl%\",\"next\": \"https://%nextUrl%?transactionRef=7761910\"},\"authentication\": {\"token\": \"%TabcorpAuth%\",\"inactivityExpiry\": \"2022-05-02T09:20:47.817Z\",\"absoluteExpiry\": \"2022-05-02T09:20:47.305Z\",\"scopes\": [\"*\"]}}
+
+
+{\"transactions\": [%transactions%],\"_links\": {\"self\": \"https://%selfUrl%\",\"next\": \"https://%nextUrl%?transactionRef=7761910\"},\"authentication\": {\"token\": \"%TabcorpAuth%\",\"inactivityExpiry\": \"2022-05-02T09:20:47.817Z\",\"absoluteExpiry\": \"2022-05-02T09:20:47.305Z\",\"scopes\": [\"*\"]}}
+
+HTTP/1.1 200 OK
+TabcorpAuth: %TabcorpAuth%
+Content-Length: %Content-Length%
+Connection: close
+Content-Type: %Content-Type%
+
+{"transactions": [%transactions%],"_links": {"self": "https://%selfUrl%","next": "https://%nextUrl%?transactionRef=7761910"},"authentication": {"token": "%TabcorpAuth%","inactivityExpiry": "2022-05-02T09:20:47.817Z","absoluteExpiry": "2022-05-02T09:20:47.305Z","scopes": ["*"]}}
+
+
+        int loopCounter = 0;
+        String variableReplace = null;
+        String currentLookupLine = null;
+        String responseTemplate = null;
+        while (loopCounter < variableArray.size()) {
+            JSONObject variable = (JSONObject) variableArray.get(loopCounter);
+            loopCounter++;
+            String responseType = (String) variable.get("type");
+            String responseLookupWith = (String) variable.get("lookupWith");
+            String responseLookupValue = (String) variable.get("lookupValue");
+            String responseContents = (String) variable.get("contents");
+
+            if (responseType.equals("path")){
+                currentLookupLine = inputMsgLines.get(0);
+                if (responseLookupWith.equals("string")){
+
+                    if (currentLookupLine.contains(responseLookupValue)){
+                        responseTemplate = responseContents;
+                        break; // found a match so break
+                    }
+                }
+            }
+        }
+
+        

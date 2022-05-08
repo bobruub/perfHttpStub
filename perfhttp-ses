@@ -1,0 +1,4 @@
+#!/bin/sh
+# script to start the perf_sven_sensis docker
+docker rm -f perf_http_stub
+docker run -d -p 8090:2525 --volume=/var/log:/var/log --name perf_http_stub image_perf_http_stub:v1
