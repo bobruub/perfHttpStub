@@ -48,8 +48,8 @@ jsr166.jar
 | Name        | Description           |||
 | ------------- |-------------|-------------|-------------|
 | name | variable name|applies to all|must be unique|
-| type| the type of variable|applies to all|
 | allowBypass| if the name is not defined in the response but still required then enter false|applies to all|boolean (true/false)|
+| type| the type of variable|applies to all|
 ||string||a fixed string variable|
 ||substring||an extract of a line based on start and end positions
 ||regex||an extract of a line based of standard regex format
