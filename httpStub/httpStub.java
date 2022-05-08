@@ -177,6 +177,7 @@ public class httpStub {
                 jedisPool,
                 dataVariablesString);
             executor.execute(httpStubWorker);
+            
           }
           //pool.close();
   

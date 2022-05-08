@@ -17,7 +17,7 @@ import java.util.*;
 import java.io.*;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
-import redis.clients.util.Pool;
+//import redis.clients.util.Pool;
 
 public class HttpStubWorker extends stubWorker implements Runnable {
 
@@ -26,7 +26,7 @@ public class HttpStubWorker extends stubWorker implements Runnable {
 
   public static final String DELIMITED_TYPE = "Delimited";
   private final Socket clientSocket;
-  private Jedis jedis;
+  //private Jedis jedis;
   private JedisPool jedisPool;
   private String requestResponseString;
   private String dataVariablesString;
@@ -78,7 +78,7 @@ public class HttpStubWorker extends stubWorker implements Runnable {
         if (lineCntr == 0) {
           firstLine = searchLine;
           lineCntr++;
-          System.out.println("httpStubWorker: Processing: " + firstLine);
+          //System.out.println("httpStubWorker: Processing: " + firstLine);
         }
         inputMsgLines.addElement(searchLine);
         /*
@@ -114,7 +114,7 @@ public class HttpStubWorker extends stubWorker implements Runnable {
     if (responseTemplateMessage) {
       responseMsg = getTemplate(0);
       defaultPause = Integer.parseInt(getTemplate(1));
-      System.out.println("httpStubWorker: Processing: " + getTemplate(2));
+      //System.out.println("httpStubWorker: Processing: " + getTemplate(2));
 
     } else {
       errorMessage = "no matching response template found";
