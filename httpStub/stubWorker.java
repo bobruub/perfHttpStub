@@ -1,5 +1,12 @@
 package httpStub;
 
+/**
+class: stubWorker
+Purpose: processes for inbound messages
+Notes:
+Author: Tim Lane
+Date: 07/05/2022
+**/
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
@@ -17,8 +24,11 @@ public class stubWorker {
 
     List<String> variableContent = new ArrayList<String>();
     List<String> templateContent = new ArrayList<String>();
-    private Jedis jedis;
 
+    //
+    // set and get array for the template message, this is used in other processes
+    // for extracting details about the template.
+    //
     public void setTemplate(String templateValue) {
         templateContent.add(templateValue);
         return;
@@ -28,6 +38,10 @@ public class stubWorker {
         return templateContent.get(templateNumber);
     }
 
+    //
+    // set and get array for the variables, when the are processed are stored in in a key/pair manner
+    // variableName~VaribaleValue
+    //     
     public void setVariable(String variableName, String variableValue) {
         // if element already exists do not insert again
         if (!variableContent.contains(variableName)) {
@@ -36,6 +50,9 @@ public class stubWorker {
         return;
     }
 
+    //
+    // get variable value by passing the variable name
+    //
     public String getVariable(String variableName) {
         String variableValue = null;
         for (var temp : variableContent) {
@@ -48,6 +65,10 @@ public class stubWorker {
         return variableValue;
     }
 
+    //
+    // get variable value by passing an element number
+    // good for looping through all varibale array
+    //
     public String getVariable(int variableNumber) {
         return variableContent.get(variableNumber);
     }
@@ -64,16 +85,33 @@ public class stubWorker {
         return variableName;
     }
 
+    //
+    // get the count of elements in the variable array
+    //
     public int getVariableLength() {
         return variableContent.size();
     }
 
+    //
+    // determine the response message based on the input crieteria
+    //{
+    //  "name": "01-Transactional-records",
+	// 	"type": "path",
+	// 	"lookupWith": "regex",
+	// 	"lookupValue": "accounts/(.+?)/",
+    //  "pause": "100",
+	// 	"contents": "HTTP/1.1 200 OK\nTabcorpAuth: %TabcorpAuth%\nContent-Length: %Content-Length%\nConnection: close\nContent-Type: %Content-Type%\n\n{\"transactions\": [%transactions%],\"_links\": {\"self\": \"https://%selfUrl%\",\"next\": \"https://%nextUrl%?transactionRef=7761910\"},\"authentication\": {\"token\": \"%TabcorpAuth%\",\"inactivityExpiry\": \"2022-05-02T09:20:47.817Z\",\"absoluteExpiry\": \"2022-05-02T09:20:47.305Z\",\"scopes\": [\"*\"]}}"
+	// }
+    //
     public boolean setResponseTemplate(Vector<String> inputMsgLines, String requestResponseString) {
 
         JSONParser parser = null;
         JSONObject responseVariables = null;
         JSONArray responseArray = null;
 
+        //
+        // copy all json response messages into an array
+        //
         boolean responseTemplateMessage = false;
         try {
             parser = new JSONParser(JSONParser.MODE_JSON_SIMPLE);
@@ -89,50 +127,86 @@ public class stubWorker {
         String responseTemplate = null;
         String templatePause = null;
         String responseName = null;
+        //
+        // loop through response message array looking for a match
+        //
         while (loopCounter < responseArray.size()) {
             JSONObject variable = (JSONObject) responseArray.get(loopCounter);
             loopCounter++;
             String responseType = (String) variable.get("type");
             responseName = (String) variable.get("name");
+            //
+            // if the current response message array is of type path
+            // 
             if (responseType.equals("path")) {
                 String responseLookupWith = (String) variable.get("lookupWith");
                 String responseLookupValue = (String) variable.get("lookupValue");
+                //
+                // extract the first line from the input message to see if it matches
+                // GET 'http://192.168.0.81:8090/v1/account-service/tab/accounts/99999936/
+                //
                 currentLookupLine = inputMsgLines.get(0);
+                //
+                // if the current response message array is of lookup type string
+                //
                 if (responseLookupWith.equals("string")) {
-                    String responseContents = (String) variable.get("contents");
+                    //
+                    // if the string exists then this is the correct message
+                    //
                     if (currentLookupLine.contains(responseLookupValue)) {
                         templatePause = (String) variable.get("pause");
-                        responseTemplate = responseContents;
+                        responseTemplate = (String) variable.get("contents");
                         responseTemplateMessage = true;
                         break; // found a match so break
                     }
                 } else if (responseLookupWith.equals("regex")) {
+                    //
+                    // if the current response message array is of lookup type regex
+                    //
                     String regexSearch = responseLookupValue;
                     var myPattern = Pattern.compile(regexSearch);
                     Matcher matcher = myPattern.matcher(currentLookupLine);
+                    //
+                    // if the regex matches then this is the correct message
+                    //
                     if (matcher.find()) {
                         responseTemplate = (String) variable.get("contents");
                         templatePause = (String) variable.get("pause");
                         responseTemplateMessage = true;
-                        break;
+                        break; // found a match so break
                     }
                 }
             } else if (responseType.equals("body")) {
+            //
+            // if the current response message array is of type body
+            // copy the entire input string for processing
+            //
                 currentLookupLine = inputMsgLines.toString();
                 String responseLookupWith = (String) variable.get("lookupWith");
                 String responseLookupValue = (String) variable.get("lookupValue");
+                //
+                // if the current response message array is of lookup type string
+                //
                 if (responseLookupWith.contains("string")) {
-                    String responseContents = (String) variable.get("contents");
+                    //
+                    // if the string exists then this is the correct message
+                    //
                     if (currentLookupLine.contains(responseLookupValue)) {
-                        responseTemplate = responseContents;
+                        responseTemplate = (String) variable.get("contents");
                         templatePause = (String) variable.get("pause");
                         responseTemplateMessage = true;
                         break; // found a match so break
                     }
                 } else if (responseLookupWith.equals("regex")) {
+                    //
+                    // if the current response message array is of lookup type regex
+                    //
                     String regexSearch = responseLookupValue;
                     var myPattern = Pattern.compile(regexSearch);
                     Matcher matcher = myPattern.matcher(currentLookupLine);
+                    //
+                    // if the regex matches then this is the correct message
+                    //
                     if (matcher.find()) {
                         responseTemplate = (String) variable.get("contents");
                         templatePause = (String) variable.get("pause");
@@ -142,6 +216,9 @@ public class stubWorker {
                 }
             }
         }
+        //
+        // if a teplate resppnse message is found store in in a template array
+        //
         if (responseTemplateMessage){
             setTemplate(responseTemplate);
             setTemplate(templatePause);
@@ -184,10 +261,6 @@ public class stubWorker {
             if (bypassVariable(variableName, allowBypass, responseMsg)) {
                 continue;
             }
-            // if (!responseMsg.contains("%"+variableName+"%") &&
-            // allowBypass.equals("true")){
-            // continue; // didnt find current name is response so move on
-            // }
             String variableType = (String) variable.get("type");
             JSONArray formatArray = (JSONArray) variable.get("format");
             int oddsCounter = 0;
@@ -201,7 +274,7 @@ public class stubWorker {
             }
         }
         //
-        // loop through all the input lines search for variables which require intput
+        // loop through all the input lines search for variables which require input
         // data
         //
         for (i = 0; i < inputMsgLines.size(); i++) {
@@ -313,7 +386,10 @@ public class stubWorker {
     }
 
     public boolean bypassVariable(String varName, String byPassFlag, String responseMsg) {
-
+//
+// if the varibale name does not exists in the templated response message 
+// AND the variable bypassFlag = true then send back a negative response
+//
         boolean returnFlag = false;
 
         if (!responseMsg.contains("%" + varName + "%") && byPassFlag.equals("true")) {

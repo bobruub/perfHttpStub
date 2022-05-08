@@ -92,9 +92,9 @@ public class httpStub {
         System.out.println("httpStub: error processing file: " + fileName + "..." + e);
         System.exit(1);
       }
-//
-// get the variables from the json file 
-//
+      //
+      // get the variables from the json file 
+      //
       fileName = "./config/datavariables.json";
       System.out.println("httpStub: opening file: " + fileName);
       try {
@@ -154,8 +154,6 @@ public class httpStub {
         // open a socket
         serverSocket = getServerSocket();
         serverSocket.setSoTimeout(5 * 1000);
-        // create a jedis connection
-        //jedis = pool.getResource();
       } catch (Exception e) {
         System.out.println("Unable to listen on " + port);
         e.printStackTrace();
@@ -179,9 +177,6 @@ public class httpStub {
             executor.execute(httpStubWorker);
             
           }
-          //pool.close();
-  
-
         } catch (SocketTimeoutException e) {
           // System.out.println("socket timeout " + connectionLoopCntr + ".");
           // DO NOTHING - The timeout just allows the checking of the restart

@@ -15,18 +15,12 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.*;
 import java.io.*;
-import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
-//import redis.clients.util.Pool;
 
 public class HttpStubWorker extends stubWorker implements Runnable {
 
-  public static final int TEMPLATE_RESPONSE = 0;
-  public static final int TEMPLATE_PAUSE = 0;
-
   public static final String DELIMITED_TYPE = "Delimited";
   private final Socket clientSocket;
-  //private Jedis jedis;
   private JedisPool jedisPool;
   private String requestResponseString;
   private String dataVariablesString;
@@ -39,7 +33,6 @@ public class HttpStubWorker extends stubWorker implements Runnable {
       JedisPool jedisPool,
       String dataVariablesString) {
     this.clientSocket = clientSocket;
-    //this.defaultPause = configObject.getInt("defaultPause");
     this.requestResponseString = requestResponseString;
     this.dataVariablesString = dataVariablesString;
     this.jedisPool = jedisPool;
@@ -71,14 +64,11 @@ public class HttpStubWorker extends stubWorker implements Runnable {
       inStream = new HttpInputStream(clientSocket.getInputStream());
       // get header details
       String searchLine = null;
-
       int lineCntr = 0;
-      //responseMsg = this.requestResponseString;
       while ((searchLine = inStream.readLine()).length() > 0) {
         if (lineCntr == 0) {
           firstLine = searchLine;
           lineCntr++;
-          //System.out.println("httpStubWorker: Processing: " + firstLine);
         }
         inputMsgLines.addElement(searchLine);
         /*
@@ -114,8 +104,6 @@ public class HttpStubWorker extends stubWorker implements Runnable {
     if (responseTemplateMessage) {
       responseMsg = getTemplate(0);
       defaultPause = Integer.parseInt(getTemplate(1));
-      //System.out.println("httpStubWorker: Processing: " + getTemplate(2));
-
     } else {
       errorMessage = "no matching response template found";
       httpRespCode = "400 Bad Request";
@@ -128,8 +116,6 @@ public class HttpStubWorker extends stubWorker implements Runnable {
       errorMessage = processMessage;
       httpRespCode = "400 Bad Request";
     }
-       
-
     //
     // loop through all the variables and replace them in the response message
     //

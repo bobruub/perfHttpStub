@@ -258,7 +258,7 @@
         </objProp>
         <stringProp name="filename"></stringProp>
         <longProp name="interval_grouping">1000</longProp>
-        <boolProp name="graph_aggregated">true</boolProp>
+        <boolProp name="graph_aggregated">false</boolProp>
         <stringProp name="include_sample_labels"></stringProp>
         <stringProp name="exclude_sample_labels"></stringProp>
         <stringProp name="start_offset"></stringProp>
